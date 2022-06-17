@@ -1,0 +1,57 @@
+<div class="list row">
+    <div class="col-md-8">
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Buscar por titulo"
+          [(ngModel)]="titulo"
+        />
+        <div class="input-group-append">
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="buscarTitulo()"
+          >
+            Buscar
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h4>Lista de Tutoriales</h4>
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let tutorial of tutoriales; let i = index"
+          [class.active]="i == currentIndex"
+          (click)="setActivarTutorial(tutorial, i)"
+        >
+          {{ tutorial.titulo }}
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <div *ngIf="currentTutorial.id">
+        <h4>Tutorial</h4>
+        <div>
+          <label><strong>Titulo:</strong></label> {{ currentTutorial.titulo }}
+        </div>
+        <div>
+          <label><strong>Description:</strong></label>
+          {{ currentTutorial.descripcion }}
+        </div>
+        <div>
+          <label><strong>Estado:</strong></label>
+          {{ currentTutorial.publicado ? "Publicado" : "Pendiente" }}
+        </div>
+        <a class="badge badge-warning" routerLink="/tutorial/{{ currentTutorial.id }}">
+          Editar
+        </a>
+      </div>
+      <div *ngIf="!currentTutorial.id">
+        <br />
+        <p>Profavor click a un Tutorial...</p>
+      </div>
+    </div>
+  </div>
